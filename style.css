@@ -340,3 +340,6 @@
   .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
   .toggle-icon { font-size: 1rem; transition: transform 0.4s; }
   [data-theme="light"] .toggle-icon { transform: rotate(180deg); }
+  
+  section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+  section:first-of-type { padding-top: 10rem; }
