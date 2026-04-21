@@ -126,5 +126,66 @@
   </div>
 </section>
 
+<section id="projects">
+  <div class="fade-up">
+    <p class="section-label">Things I've Built</p>
+    <h2>Projects</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="projects-grid fade-up">
+
+    <!--HeliBay Project 1-->
+    <div class="project-card">
+      <div class="project-img-area" onclick="document.getElementById('upload1').click()" title="Click to upload screenshot">
+        <div class="img-placeholder" id="placeholder1">
+          <span>🚁</span>
+          <span>Click to add screenshot</span>
+        </div>
+        <img id="img1" style="display:none" alt="Helicopter Store Website" />
+        <div class="upload-overlay">
+          <span>📸</span>
+          <span>Upload Screenshot</span>
+        </div>
+        <input type="file" id="upload1" class="file-input" accept="image/*" onchange="loadImage(event,'img1','placeholder1')">
+      </div>
+      <div class="project-body">
+        <div class="project-tag">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Web Design</span>
+        </div>
+        <div class="project-title">HeliBay — Helicopter Store</div>
+        <p class="project-desc">A custom-built e-commerce website themed around selling helicopters — a fun and creative front-end project showcasing product layout design, responsive styling, and visual storytelling using pure HTML and CSS.</p>
+      </div>
+    </div>
+
+    <!--Book Borrowing System Project 2-->
+        <div class="project-card">
+      <div class="project-img-area" onclick="document.getElementById('upload2').click()" title="Click to upload screenshot">
+        <div class="img-placeholder" id="placeholder2">
+          <span>📚</span>
+          <span>Click to add screenshot</span>
+        </div>
+        <img id="img2" style="display:none" alt="Java Book Borrowing System" />
+        <div class="upload-overlay">
+          <span>📸</span>
+          <span>Upload Screenshot</span>
+        </div>
+        <input type="file" id="upload2" class="file-input" accept="image/*" onchange="loadImage(event,'img2','placeholder2')">
+      </div>
+      <div class="project-body">
+        <div class="project-tag">
+          <span class="tag">Java</span>
+          <span class="tag red">MySQL</span>
+          <span class="tag">phpMyAdmin</span>
+        </div>
+        <div class="project-title">LibraTrack — Book Borrowing System</div>
+        <p class="project-desc">A Java-based library management system connected to a MySQL database via phpMyAdmin. Allows users to borrow, return, and track books with a structured backend — demonstrating database integration and OOP principles.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 </body>
 </html>
