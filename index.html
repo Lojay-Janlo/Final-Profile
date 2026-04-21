@@ -40,7 +40,7 @@
     <div>
       <div class="hero-tag">Aspiring Game Developer</div>
       <h1>Hi, I'm <span>Jaylo</span><br>P. Guangco</h1>
-      <p class="hero-bio">A passionate Information Computer Technology student with a love for building interactive experiences — from web systems to game development. Currently leveling up my skills and crafting projects that blend creativity with code.</p>
+      <p class="hero-bio">A passionate computer science student with a love for building interactive experiences — from web systems to game development. Currently leveling up my skills and crafting projects that blend creativity with code.</p>
       <div class="hero-btns">
         <a href="https://github.com/Lojay-Janlo/Resume.pdf" target="_blank" class="btn btn-primary" download>
           ⬇ Download Resume
@@ -50,7 +50,9 @@
     </div>
     <div class="avatar-wrap">
       <div class="avatar-ring"></div>
-      <div class="avatar" id="hero-avatar">JG</div>
+      <div class="avatar" id="hero-avatar">
+        <img src="pfp.png" alt="Jaylo P. Guangco" onerror="this.style.display='none'" />
+      </div>
     </div>
   </div>
 </section>
@@ -151,17 +153,8 @@
 
     <!-- Project 1 -->
     <div class="project-card">
-      <div class="project-img-area" onclick="document.getElementById('upload1').click()" title="Click to upload screenshot">
-        <div class="img-placeholder" id="placeholder1">
-          <span>🚁</span>
-          <span>Click to add screenshot</span>
-        </div>
-        <img id="img1" style="display:none" alt="Helicopter Store Website" />
-        <div class="upload-overlay">
-          <span>📸</span>
-          <span>Upload Screenshot</span>
-        </div>
-        <input type="file" id="upload1" class="file-input" accept="image/*" onchange="loadImage(event,'img1','placeholder1')">
+      <div class="project-img-area">
+        <img src="heli-store.png" alt="Helicopter Store Website" onerror="this.outerHTML='<div class=\'img-placeholder\'><span>🚁</span><span>heli-store.png not found</span></div>'" />
       </div>
       <div class="project-body">
         <div class="project-tag">
@@ -176,17 +169,8 @@
 
     <!-- Project 2 -->
     <div class="project-card">
-      <div class="project-img-area" onclick="document.getElementById('upload2').click()" title="Click to upload screenshot">
-        <div class="img-placeholder" id="placeholder2">
-          <span>📚</span>
-          <span>Click to add screenshot</span>
-        </div>
-        <img id="img2" style="display:none" alt="Java Book Borrowing System" />
-        <div class="upload-overlay">
-          <span>📸</span>
-          <span>Upload Screenshot</span>
-        </div>
-        <input type="file" id="upload2" class="file-input" accept="image/*" onchange="loadImage(event,'img2','placeholder2')">
+      <div class="project-img-area">
+        <img src="bookSystem.png" alt="Java Book Borrowing System" onerror="this.outerHTML='<div class=\'img-placeholder\'><span>📚</span><span>bookSystem.png not found</span></div>'" />
       </div>
       <div class="project-body">
         <div class="project-tag">
@@ -264,19 +248,7 @@ function toggleTheme() {
   document.getElementById('theme-label').textContent = isDark ? 'Light' : 'Dark';
 }
 
-function loadImage(event, imgId, placeholderId) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = document.getElementById(imgId);
-    const placeholder = document.getElementById(placeholderId);
-    img.src = e.target.result;
-    img.style.display = 'block';
-    placeholder.style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-}
+
 
 async function handleSubmit(e) {
   e.preventDefault();
