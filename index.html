@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaylo P. Guangco — Portfolio</title>
+<link href="style.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init({ publicKey: "YOUR_EMAILJS_PUBLIC_KEY" });
+  })();
+</script>
+
 </head>
 <body>
 
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
 
-    <nav>
+<!-- NAV -->
+<nav>
   <a href="#home" class="nav-logo">JPG</a>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
@@ -26,7 +34,8 @@
   </button>
 </nav>
 
-    <section id="home">
+<!-- HOME -->
+<section id="home">
   <div class="hero-inner">
     <div>
       <div class="hero-tag">Aspiring Game Developer</div>
@@ -46,6 +55,7 @@
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="fade-up">
     <p class="section-label">Get to Know Me</p>
@@ -94,7 +104,8 @@
   </div>
 </section>
 
-    <section id="skills">
+<!-- SKILLS -->
+<section id="skills">
   <div class="fade-up">
     <p class="section-label">What I Work With</p>
     <h2>Tech Stack</h2>
@@ -129,6 +140,7 @@
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="fade-up">
     <p class="section-label">Things I've Built</p>
@@ -137,7 +149,7 @@
   </div>
   <div class="projects-grid fade-up">
 
-    <!--HeliBay Project 1-->
+    <!-- Project 1 -->
     <div class="project-card">
       <div class="project-img-area" onclick="document.getElementById('upload1').click()" title="Click to upload screenshot">
         <div class="img-placeholder" id="placeholder1">
@@ -162,8 +174,8 @@
       </div>
     </div>
 
-    <!--Book Borrowing System Project 2-->
-        <div class="project-card">
+    <!-- Project 2 -->
+    <div class="project-card">
       <div class="project-img-area" onclick="document.getElementById('upload2').click()" title="Click to upload screenshot">
         <div class="img-placeholder" id="placeholder2">
           <span>📚</span>
@@ -190,7 +202,8 @@
   </div>
 </section>
 
-    <section id="contact">
+<!-- CONTACT -->
+<section id="contact">
   <div class="fade-up">
     <p class="section-label">Let's Connect</p>
     <h2>Contact Me</h2>
@@ -242,5 +255,60 @@
   <p>Designed & built by <span>Jaylo P. Guangco</span> &mdash; Aspiring Game Developer 🎮</p>
 </footer>
 
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+  document.getElementById('theme-label').textContent = isDark ? 'Light' : 'Dark';
+}
+
+function loadImage(event, imgId, placeholderId) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = document.getElementById(imgId);
+    const placeholder = document.getElementById(placeholderId);
+    img.src = e.target.result;
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const successMsg = document.getElementById('form-success');
+  const errorMsg = document.getElementById('form-error');
+  successMsg.style.display = 'none';
+  errorMsg.style.display = 'none';
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    await emailjs.sendForm(
+      'YOUR_SERVICE_ID',
+      'YOUR_TEMPLATE_ID',
+      document.getElementById('contact-form')
+    );
+    successMsg.style.display = 'block';
+    e.target.reset();
+  } catch(err) {
+    errorMsg.style.display = 'block';
+    console.error('EmailJS error:', err);
+  } finally {
+    btn.textContent = 'Send Message ✉️';
+    btn.disabled = false;
+  }
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
