@@ -284,3 +284,12 @@
     .projects-grid { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: repeat(3, 1fr); }
   }
+
+    .blob {
+    position: fixed; border-radius: 50%; filter: blur(80px);
+    opacity: 0.12; pointer-events: none; z-index: 0;
+    transition: opacity 0.4s;
+  }
+  [data-theme="light"] .blob { opacity: 0.18; }
+  .blob1 { width: 500px; height: 500px; background: #7c6fff; top: -100px; left: -100px; }
+  .blob2 { width: 400px; height: 400px; background: #ff6b6b; bottom: 10%; right: -100px; }
