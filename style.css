@@ -323,3 +323,20 @@
   [data-theme="light"] .blob { opacity: 0.18; }
   .blob1 { width: 500px; height: 500px; background: #7c6fff; top: -100px; left: -100px; }
   .blob2 { width: 400px; height: 400px; background: #ff6b6b; bottom: 10%; right: -100px; }
+
+    .theme-toggle {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--toggle-bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 12px 4px 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted);
+    user-select: none;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+  .toggle-icon { font-size: 1rem; transition: transform 0.4s; }
+  [data-theme="light"] .toggle-icon { transform: rotate(180deg); }
