@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jaylo P. Guangco — Portfolio</title>
 <link href="style.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
   (function(){
-    emailjs.init({ publicKey: "YOUR_EMAILJS_PUBLIC_KEY" });
+    emailjs.init({ publicKey: "38Tq6F02tN8afgsEn" });
   })();
 </script>
 
@@ -18,7 +17,6 @@
 <div class="blob blob1"></div>
 <div class="blob blob2"></div>
 
-<!-- NAV -->
 <nav>
   <a href="#home" class="nav-logo">JPG</a>
   <ul class="nav-links">
@@ -34,15 +32,14 @@
   </button>
 </nav>
 
-<!-- HOME -->
 <section id="home">
   <div class="hero-inner">
     <div>
       <div class="hero-tag">Aspiring Game Developer</div>
       <h1>Hi, I'm <span>Jaylo</span><br>P. Guangco</h1>
-      <p class="hero-bio">A passionate Information Computer Technology student with a love for building interactive experiences — from web systems to game development. Currently leveling up my skills and crafting projects that blend creativity with code.</p>
+      <p class="hero-bio">A passionate Information Communication Technology student with a love for building interactive experiences — from web systems to game development. Currently leveling up my skills and crafting projects that blend creativity with code.</p>
       <div class="hero-btns">
-        <a href="https://github.com/Lojay-Janlo/Resume.pdf" target="_blank" class="btn btn-primary" download>
+        <a href="https://raw.githubusercontent.com/Lojay-Janlo/Final-Profile/master/Resume.pdf" target="_blank" class="btn btn-primary" download>
           ⬇ Download Resume
         </a>
         <a href="#projects" class="btn btn-outline">View My Work</a>
@@ -106,7 +103,6 @@
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <div class="fade-up">
     <p class="section-label">What I Work With</p>
@@ -142,7 +138,6 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="fade-up">
     <p class="section-label">Things I've Built</p>
@@ -151,7 +146,6 @@
   </div>
   <div class="projects-grid fade-up">
 
-    <!-- Project 1 -->
     <div class="project-card">
       <div class="project-img-area">
         <img src="heli-store.png" alt="Helicopter Store Website" onerror="this.outerHTML='<div class=\'img-placeholder\'><span>🚁</span><span>heli-store.png not found</span></div>'" />
@@ -167,7 +161,6 @@
       </div>
     </div>
 
-    <!-- Project 2 -->
     <div class="project-card">
       <div class="project-img-area">
         <img src="bookSystem.png" alt="Java Book Borrowing System" onerror="this.outerHTML='<div class=\'img-placeholder\'><span>📚</span><span>bookSystem.png not found</span></div>'" />
@@ -186,7 +179,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="fade-up">
     <p class="section-label">Let's Connect</p>
@@ -262,8 +254,8 @@ async function handleSubmit(e) {
 
   try {
     await emailjs.sendForm(
-      'YOUR_SERVICE_ID',
-      'YOUR_TEMPLATE_ID',
+      'service_u0zi79e',
+      'template_b6im96p',
       document.getElementById('contact-form')
     );
     successMsg.style.display = 'block';
