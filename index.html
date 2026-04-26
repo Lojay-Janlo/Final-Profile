@@ -5,39 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jaylo P. Guangco — Portfolio</title>
 <link href="style.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
   (function(){
     emailjs.init({ publicKey: "38Tq6F02tN8afgsEn" });
   })();
 </script>
-
 </head>
 <body>
 
 <div class="blob blob1"></div>
 <div class="blob blob2"></div>
 
+<!-- NAV -->
 <nav>
   <a href="#home" class="nav-logo">JPG</a>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#home" onclick="closeMenu()">Home</a></li>
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+    <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
   </ul>
-  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-    <span class="toggle-icon" id="theme-icon">🌙</span>
-    <span id="theme-label">Dark</span>
-  </button>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="toggle-icon" id="theme-icon">🌙</span>
+      <span id="theme-label" class="toggle-label">Dark</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
+<!-- Drawer always in DOM, shown/hidden via CSS classes only (no display:none) -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <ul class="drawer-links">
+    <li><a href="#home" onclick="closeMenu()">🏠 Home</a></li>
+    <li><a href="#about" onclick="closeMenu()">👤 About</a></li>
+    <li><a href="#skills" onclick="closeMenu()">⚡ Skills</a></li>
+    <li><a href="#projects" onclick="closeMenu()">🗂 Projects</a></li>
+    <li><a href="#contact" onclick="closeMenu()">✉️ Contact</a></li>
+  </ul>
+</div>
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeMenu()"></div>
+
+<!-- HOME -->
 <section id="home">
   <div class="hero-inner">
     <div>
       <div class="hero-tag">Aspiring Game Developer</div>
       <h1>Hi, I'm <span>Jaylo</span><br>P. Guangco</h1>
-      <p class="hero-bio">A passionate Information Communication Technology student with a love for building interactive experiences — from web systems to game development. Currently leveling up my skills and crafting projects that blend creativity with code.</p>
+      <p class="hero-bio">A passionate computer science student with a love for building interactive experiences — from web systems to game development. Currently leveling up my skills and crafting projects that blend creativity with code.</p>
       <div class="hero-btns">
         <a href="https://raw.githubusercontent.com/Lojay-Janlo/Final-Profile/master/Resume.pdf" target="_blank" class="btn btn-primary" download>
           ⬇ Download Resume
@@ -103,6 +122,7 @@
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <div class="fade-up">
     <p class="section-label">What I Work With</p>
@@ -138,6 +158,7 @@
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="fade-up">
     <p class="section-label">Things I've Built</p>
@@ -146,6 +167,7 @@
   </div>
   <div class="projects-grid fade-up">
 
+    <!-- Project 1 -->
     <div class="project-card">
       <div class="project-img-area">
         <img src="heli-store.png" alt="Helicopter Store Website" onerror="this.outerHTML='<div class=\'img-placeholder\'><span>🚁</span><span>heli-store.png not found</span></div>'" />
@@ -161,6 +183,7 @@
       </div>
     </div>
 
+    <!-- Project 2 -->
     <div class="project-card">
       <div class="project-img-area">
         <img src="bookSystem.png" alt="Java Book Borrowing System" onerror="this.outerHTML='<div class=\'img-placeholder\'><span>📚</span><span>bookSystem.png not found</span></div>'" />
@@ -179,6 +202,7 @@
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="fade-up">
     <p class="section-label">Let's Connect</p>
@@ -196,25 +220,25 @@
         <a href="https://github.com/Lojay-Janlo" target="_blank" class="social-link">
           <span class="social-icon">🐙</span>
           github.com/Lojay-Janlo
+        </a>
         <a href="https://www.facebook.com/profile.php?id=61588786226533" target="_blank" class="social-link">
           <span class="social-icon">📘</span>
           Facebook Profile
         </a>
-
       </div>
     </div>
     <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
       <div class="form-group">
-        <label for="from_name">Your Name</label>
-        <input type="text" id="from_name" name="from_name" placeholder="Enter your name" required />
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required />
       </div>
       <div class="form-group">
-        <label for="reply_to">Email Address</label>
-        <input type="email" id="reply_to" name="reply_to" placeholder="Enter your email" required />
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
       </div>
       <div class="form-group">
-        <label for="subject">Subject</label>
-        <input type="text" id="subject" name="subject" placeholder="What's it about?" required />
+        <label for="title">Subject</label>
+        <input type="text" id="title" name="title" placeholder="What's it about?" required />
       </div>
       <div class="form-group">
         <label for="message">Message</label>
@@ -232,6 +256,29 @@
 </footer>
 
 <script>
+/* ── HAMBURGER MENU ── */
+function toggleMenu() {
+  const drawer = document.getElementById('mobile-drawer');
+  const overlay = document.getElementById('drawer-overlay');
+  const hamburger = document.getElementById('hamburger');
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    hamburger.classList.remove('open');
+  } else {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    hamburger.classList.add('open');
+  }
+}
+function closeMenu() {
+  document.getElementById('mobile-drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+/* ── THEME TOGGLE ── */
 function toggleTheme() {
   const html = document.documentElement;
   const isDark = html.getAttribute('data-theme') === 'dark';
@@ -240,8 +287,7 @@ function toggleTheme() {
   document.getElementById('theme-label').textContent = isDark ? 'Light' : 'Dark';
 }
 
-
-
+/* ── EMAILJS FORM ── */
 async function handleSubmit(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
@@ -270,8 +316,17 @@ async function handleSubmit(e) {
 }
 
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
-}, { threshold: 0.15 });
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+      observer.unobserve(el.target);
+    }
+  });
+}, {
+  threshold: 0,
+  rootMargin: '0px 0px -40px 0px'
+});
+
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 </body>
