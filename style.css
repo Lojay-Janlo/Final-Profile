@@ -78,6 +78,9 @@ nav {
 .nav-links a:hover { color: var(--text); }
 .nav-links a:hover::after { transform: scaleX(1); }
 
+/* ── NAV RIGHT ── */
+.nav-right { display: flex; align-items: center; gap: 0.75rem; }
+
 /* ── THEME TOGGLE ── */
 .theme-toggle {
   display: flex; align-items: center; gap: 8px;
@@ -95,10 +98,7 @@ nav {
 .toggle-icon { font-size: 1rem; transition: transform 0.4s; }
 [data-theme="light"] .toggle-icon { transform: rotate(180deg); }
 
-/* ── NAV RIGHT ── */
-.nav-right { display: flex; align-items: center; gap: 0.75rem; }
-
-/* ── HAMBURGER ── */
+/* ── HAMBURGER — hidden on desktop ── */
 .hamburger {
   display: none;
   flex-direction: column; justify-content: center; align-items: center;
@@ -123,27 +123,14 @@ nav {
 .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* ── MOBILE DRAWER ──
-   Key fix: always rendered in the DOM, hidden via opacity + pointer-events
-   NOT display:none, so transitions actually fire on mobile */
+/* ── MOBILE DRAWER — completely hidden on desktop ── */
 .mobile-drawer {
+  display: none; /* hidden on desktop, JS won't affect it */
   position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
   background: var(--nav-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  transform: translateY(-12px);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  /* Hide entirely on desktop using visibility */
-  visibility: hidden;
-}
-.mobile-drawer.open {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: all;
-  visibility: visible;
 }
 .drawer-links {
   list-style: none;
@@ -165,22 +152,12 @@ nav {
   color: var(--accent);
 }
 
-/* ── OVERLAY ──
-   Same fix: always in DOM, hidden via opacity */
+/* ── OVERLAY — completely hidden on desktop ── */
 .drawer-overlay {
+  display: none;
   position: fixed; inset: 0; z-index: 98;
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
-  visibility: hidden;
-}
-.drawer-overlay.open {
-  opacity: 1;
-  pointer-events: all;
-  visibility: visible;
+  background: rgba(0,0,0,0.45);
+  cursor: pointer;
 }
 
 /* ── SECTIONS ── */
@@ -384,9 +361,7 @@ h2 {
 .img-placeholder span:last-child { font-size: 0.75rem; }
 
 .project-body { padding: 1.5rem; }
-.project-tag {
-  display: inline-flex; gap: 5px; flex-wrap: wrap; margin-bottom: 0.75rem;
-}
+.project-tag { display: inline-flex; gap: 5px; flex-wrap: wrap; margin-bottom: 0.75rem; }
 .tag {
   font-size: 0.68rem; font-weight: 600; letter-spacing: 0.5px;
   padding: 3px 10px; border-radius: 999px;
@@ -430,12 +405,11 @@ input, textarea {
   padding: 0.75rem 1rem;
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
+  font-size: max(16px, 0.9rem); /* prevents iOS zoom */
   transition: border-color 0.2s;
   outline: none;
   backdrop-filter: blur(8px);
-  /* Fix iOS zoom on focus */
-  font-size: max(16px, 0.9rem);
+  width: 100%;
 }
 input:focus, textarea:focus { border-color: var(--accent); }
 input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.6; }
@@ -456,32 +430,68 @@ footer span { color: var(--accent); }
 /* ── FADE-UP ANIMATIONS ── */
 .fade-up {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-/* ── MOBILE ── */
+/* ════════════════════════════════════
+   MOBILE — max-width: 768px
+   Everything mobile-specific lives here
+   ════════════════════════════════════ */
 @media (max-width: 768px) {
-  nav { padding: 0 1.25rem; }
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  .toggle-label { display: none; }
 
+  /* Nav */
+  nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }        /* hide desktop links */
+  .hamburger { display: flex; }        /* show hamburger */
+  .toggle-label { display: none; }     /* hide "Dark/Light" text */
+
+  /* Drawer — only exists / displays on mobile */
+  .mobile-drawer {
+    display: block;                    /* make it exist in layout */
+    /* start hidden via max-height animation — no opacity trick needed */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mobile-drawer.open {
+    max-height: 400px;                 /* larger than drawer content */
+  }
+
+  /* Overlay */
+  .drawer-overlay {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .drawer-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Sections */
   section { padding: 4rem 1.25rem; }
   section:first-of-type { padding-top: 8rem; }
 
-  .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-  .avatar-wrap { margin: 0 auto; width: 160px; height: 160px; }
-  .avatar { width: 160px; height: 160px; }
-  .hero-btns { justify-content: center; }
+  /* Hero — stack vertically, avatar below text */
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
   .hero-bio { margin: 0 auto 2rem; }
+  .hero-btns { justify-content: center; }
+  .avatar-wrap { margin: 0 auto; width: 180px; height: 180px; }
+  .avatar { width: 180px; height: 180px; font-size: 3.5rem; }
 
+  /* Grids */
   .about-grid { grid-template-columns: 1fr; gap: 2rem; }
   .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
   .projects-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: repeat(3, 1fr); }
 
-  /* Ensure fade-up works on mobile — lower threshold */
-  .fade-up { transform: translateY(16px); }
+  /* Fade-up: smaller offset on mobile */
+  .fade-up { transform: translateY(14px); }
 }
